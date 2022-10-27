@@ -12,10 +12,11 @@ public class RecursiveMethods {
 	 *         ...)
 	 */
 	public static double geometricSum(int n) {
-		
+			if (n==0)  {
+				return 0;
+			} else 
+				return Math.pow(0.5, n) + geometricSum(n-1);
 			// FIXME compute the geometric sum for the first n terms recursively
-			return 0;
-		
 	}
 
 	/**
@@ -27,9 +28,15 @@ public class RecursiveMethods {
 	 * @return greatest common divisor of p and q
 	 */
 	public static int gcd(int p, int q) {
-		
+		if (p % q == 0)  {
+				return q;
+		} else  {
+			int temp = q;
+			q = p % q;
+			p = temp;
+			return gcd(p,q);
+		}
 			// FIXME compute the gcd of p and q using recursion
-			return 0;
 		
 	}
 
@@ -42,11 +49,25 @@ public class RecursiveMethods {
 	 * @return an array with the same data as the input but it reverse order
 	 */
 	public static int[] toReversed(int[] array) {
+		int[] reversed = new int[array.length];
+		int index = 0;
+		int mirrorIndex = array.length - 1;
+		return helper(array, reversed, index, mirrorIndex);
+	}
+	public static int[] helper(int[] array, int[] reversed, int index, int mirrorIndex)  {
+		if (index >= mirrorIndex)  {
+			return reversed;	
+		} else  {
+		reversed[index] = array[mirrorIndex];
+		reversed[mirrorIndex] = array[index];
+		return helper(array, reversed, index++, mirrorIndex--);
+		}
+	}
 		
 			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+			//return new int[0];
 		
-	}
+	
 
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
